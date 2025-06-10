@@ -9,11 +9,13 @@ import (
 type (
 	// Config -.
 	Config struct {
-		App     App
-		HTTP    HTTP
-		Log     Log
-		Metrics Metrics
-		Swagger Swagger
+		App         App
+		HTTP        HTTP
+		Log         Log
+		Metrics     Metrics
+		Swagger     Swagger
+		NGROK       NGROK
+		OpenWeather OpenWeather
 	}
 
 	// App -.
@@ -41,6 +43,15 @@ type (
 	// Swagger -.
 	Swagger struct {
 		Enabled bool `env:"SWAGGER_ENABLED" envDefault:"false"`
+	}
+
+	NGROK struct {
+		AuthToken string `env:"NGROK_AUTHTOKEN" envDefault:"false"`
+	}
+
+	OpenWeather struct {
+		ApiUrl string `env:"OPEN_WEATHER_API_URL" envDefault:"false"`
+		ApiKey string `env:"OPEN_WEATHER_API_KEY" envDefault:"false"`
 	}
 )
 

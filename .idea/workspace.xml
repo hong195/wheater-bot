@@ -4,51 +4,49 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d5af7a4d-927f-4e54-a90c-f5dd60ada04c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.dockerignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.golangci.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/goweatherbot.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmd/app/main.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/config.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/app/app.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/app/migrate.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/controller/http/middleware/logger.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/controller/http/middleware/recovery.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/controller/http/router.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/controller/http/v1/controller.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/controller/http/v1/error.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/controller/http/v1/request/translate.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/controller/http/v1/response/error.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/controller/http/v1/router.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/controller/http/v1/translation.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/entity/translation.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/usecase/contracts.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/usecase/translation/translation.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/20210221023242_migrate_name.down.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/20210221023242_migrate_name.up.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nginx/nginx.conf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pkg/httpserver/options.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pkg/httpserver/server.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pkg/logger/logger.go" afterDir="false" />
+    <list default="true" id="d5af7a4d-927f-4e54-a90c-f5dd60ada04c" name="Changes" comment="Init commit.">
+      <change afterPath="$PROJECT_DIR$/internal/controller/http/v1/weather.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/entity/city_details.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/entity/weather.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/repo/webapi/city_details_openstreetmap.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/repo/webapi/weather_open_weather.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/usecase/weather/types.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/usecase/weather/weather.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/app/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/app/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/app/app.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/app/app.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/app/migrate.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/controller/http/middleware/logger.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/controller/http/middleware/logger.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/controller/http/middleware/recovery.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/controller/http/middleware/recovery.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/controller/http/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/controller/http/router.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/controller/http/v1/controller.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/controller/http/v1/controller.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/controller/http/v1/error.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/controller/http/v1/error.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/controller/http/v1/request/translate.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/controller/http/v1/request/weather.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/controller/http/v1/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/controller/http/v1/router.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/controller/http/v1/translation.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/entity/translation.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/usecase/contracts.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/usecase/translation/translation.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/20210221023242_migrate_name.down.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/20210221023242_migrate_name.up.sql" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Go File" />
+      </list>
+    </option>
   </component>
   <component name="GOROOT" url="file:///opt/homebrew/opt/go/libexec" />
   <component name="Git.Settings">
@@ -80,6 +78,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "DefaultGoTemplateProperty": "Go File",
     "Go Build.go build goweatherbot.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.go.formatter.settings.were.checked": "true",
@@ -99,6 +98,7 @@
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/internal/repo/webapi" />
       <recent name="$PROJECT_DIR$/../]" />
       <recent name="$PROJECT_DIR$" />
     </key>
@@ -130,6 +130,27 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="false" />
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Init commit." />
+    <option name="LAST_COMMIT_MESSAGE" value="Init commit." />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

@@ -1,20 +1,18 @@
 package v1
 
 import (
-	"github.com/evrone/go-clean-template/internal/usecase"
-	"github.com/evrone/go-clean-template/pkg/logger"
 	"github.com/go-playground/validator/v10"
 	"github.com/gofiber/fiber/v2"
+	"github.com/hong195/wheater-bot/internal/usecase/weather"
+	"github.com/hong195/wheater-bot/pkg/logger"
 )
 
-// NewTranslationRoutes -.
-func NewTranslationRoutes(apiV1Group fiber.Router, t usecase.Translation, l logger.Interface) {
-	r := &V1{t: t, l: l, v: validator.New(validator.WithRequiredStructEnabled())}
+// NewWeatherRoutes -.
+func NewWeatherRoutes(apiV1Group fiber.Router, w *weather.UseCase, l logger.Interface) {
+	r := &V1{w: w, l: l, v: validator.New(validator.WithRequiredStructEnabled())}
 
-	translationGroup := apiV1Group.Group("/translation")
-
+	translationGroup := apiV1Group.Group("/weather")
 	{
-		translationGroup.Get("/history", r.history)
-		translationGroup.Post("/do-translate", r.doTranslate)
+		translationGroup.Get("/", r.weatherByCoordinates)
 	}
 }

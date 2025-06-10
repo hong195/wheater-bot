@@ -3,27 +3,30 @@ package app
 
 import (
 	"fmt"
+	"github.com/hong195/wheater-bot/internal/repo/webapi"
 	"os"
 	"os/signal"
 	"syscall"
 
-	"github.com/evrone/go-clean-template/config"
-	"github.com/evrone/go-clean-template/internal/controller/http"
-	"github.com/evrone/go-clean-template/internal/usecase/translation"
-	"github.com/evrone/go-clean-template/pkg/httpserver"
-	"github.com/evrone/go-clean-template/pkg/logger"
+	"github.com/hong195/wheater-bot/config"
+	"github.com/hong195/wheater-bot/internal/controller/http"
+	"github.com/hong195/wheater-bot/internal/usecase/weather"
+	"github.com/hong195/wheater-bot/pkg/httpserver"
+	"github.com/hong195/wheater-bot/pkg/logger"
 )
 
 // Run creates objects via constructors.
 func Run(cfg *config.Config) {
 	l := logger.New(cfg.Log.Level)
 
+	weatherRepo := webapi.NewWeatherWebApi(cfg.OpenWeather.ApiUrl, cfg.OpenWeather.ApiKey)
+	cityDetailRepo := webapi.NewCityDetailsRepository()
 	// Use-Case
-	translationUseCase := translation.New()
+	weatherUseCase := weather.New(cityDetailRepo, weatherRepo)
 
 	// HTTP Server
 	httpServer := httpserver.New(httpserver.Port(cfg.HTTP.Port), httpserver.Prefork(cfg.HTTP.UsePreforkMode))
-	http.NewRouter(httpServer.App, cfg, translationUseCase, l)
+	http.NewRouter(httpServer.App, cfg, weatherUseCase, l)
 
 	// Start servers
 	httpServer.Start()

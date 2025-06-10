@@ -40,14 +40,6 @@ swag-v1: ### swag init
 	swag init -g internal/controller/http/router.go
 .PHONY: swag-v1
 
-proto-v1: ### generate source files from proto
-	protoc --go_out=. \
-		--go_opt=paths=source_relative \
-		--go-grpc_out=. \
-		--go-grpc_opt=paths=source_relative \
-		docs/proto/v1/*.proto
-.PHONY: proto-v1
-
 deps: ### deps tidy + verify
 	go mod tidy && go mod verify
 .PHONY: deps
@@ -60,11 +52,6 @@ format: ### Run code formatter
 	gofumpt -l -w .
 	gci write . --skip-generated -s standard -s default
 .PHONY: format
-
-run: deps swag-v1 proto-v1 ### swag run for API v1
-	go mod download && \
-	CGO_ENABLED=0 go run -tags migrate ./cmd/app
-.PHONY: run
 
 docker-rm-volume: ### remove docker volume
 	docker volume rm go-clean-template_pg-data
@@ -94,14 +81,6 @@ mock: ### run mockgen
 	mockgen -source ./internal/repo/contracts.go -package usecase_test > ./internal/usecase/mocks_repo_test.go
 	mockgen -source ./internal/usecase/contracts.go -package usecase_test > ./internal/usecase/mocks_usecase_test.go
 .PHONY: mock
-
-migrate-create:  ### create new migration
-	migrate create -ext sql -dir migrations '$(word 2,$(MAKECMDGOALS))'
-.PHONY: migrate-create
-
-migrate-up: ### migration up
-	migrate -path migrations -database '$(PG_URL)?sslmode=disable' up
-.PHONY: migrate-up
 
 bin-deps: ### install tools
 	GOBIN=$(LOCAL_BIN) go install tool

@@ -16,7 +16,6 @@ x-backend-app-environment: &x-backend-app-environment
   # Swagger
   SWAGGER_ENABLED: "true"
 
-
 services:
   app:
     container_name: app
@@ -34,6 +33,17 @@ services:
         aliases:
           - app.lvh.me
 
+  ngrok:
+    image: ngrok/ngrok:latest
+    command: http bot:8088
+    environment:
+      - NGROK_AUTHTOKEN=${NGROK_AUTHTOKEN}
+    restart: unless-stopped
+    networks:
+      app_network:
+        aliases:
+          - ngrok.lvh.me
+
   nginx:
     image: nginx:1.27-alpine
     volumes:
@@ -46,7 +56,6 @@ services:
       app_network:
         aliases:
           - nginx.lvh.me
-
 
 networks:
   app_network:
