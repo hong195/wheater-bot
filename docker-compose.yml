@@ -1,5 +1,3 @@
-version: "3.9"
-
 x-backend-app-environment: &x-backend-app-environment
   GOMAXPROCS: "1"
   # App
@@ -16,13 +14,17 @@ x-backend-app-environment: &x-backend-app-environment
   # Swagger
   SWAGGER_ENABLED: "true"
 
+  #Open weather
+  OPEN_WEATHER_API_URL: ${OPEN_WEATHER_API_URL}
+  OPEN_WEATHER_API_KEY: ${OPEN_WEATHER_API_KEY}
+
 services:
   app:
     container_name: app
     platform: linux/amd64
     pid: "host"
     build:
-      context: wheater-bot
+      context: .
     environment:
       <<: *x-backend-app-environment
     ports:

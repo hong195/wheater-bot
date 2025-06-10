@@ -42,7 +42,8 @@ func NewRouter(app *fiber.App, cfg *config.Config, w *weather.UseCase, l logger.
 	app.Get("/healthz", func(ctx *fiber.Ctx) error { return ctx.SendStatus(http.StatusOK) })
 
 	// Routers
-	apiV1Group := app.Group("/v1")
+
+	apiV1Group := app.Group("api/v1")
 	{
 		v1.NewWeatherRoutes(apiV1Group, w, l)
 	}

@@ -1,0 +1,19 @@
+# .air.toml
+root = "."
+tmp_dir = "tmp"
+
+[build]
+  # Исправляем путь для сборки, чтобы соответствовать структуре в контейнере
+  cmd = "go build -o ./tmp/main ./cmd/app/"
+  bin = "tmp/main"
+  full_bin = "tmp/main"
+  delay = 200
+  # Добавляем директории для отслеживания изменений
+  include_dir = [".", "cmd", "internal", "pkg", "config"]
+  # Указываем расширения файлов для отслеживания
+  include_ext = ["go", "env", "yml", "yaml"]
+  # Исключаем временные директории
+  exclude_dir = ["tmp"]
+
+[color]
+  main = "yellow"

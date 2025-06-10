@@ -14,7 +14,6 @@ type (
 		Log         Log
 		Metrics     Metrics
 		Swagger     Swagger
-		NGROK       NGROK
 		OpenWeather OpenWeather
 	}
 
@@ -42,22 +41,19 @@ type (
 
 	// Swagger -.
 	Swagger struct {
-		Enabled bool `env:"SWAGGER_ENABLED" envDefault:"false"`
-	}
-
-	NGROK struct {
-		AuthToken string `env:"NGROK_AUTHTOKEN" envDefault:"false"`
+		Enabled bool `env:"SWAGGER_ENABLED" envDefault:"true"`
 	}
 
 	OpenWeather struct {
-		ApiUrl string `env:"OPEN_WEATHER_API_URL" envDefault:"false"`
-		ApiKey string `env:"OPEN_WEATHER_API_KEY" envDefault:"false"`
+		ApiUrl string `env:"OPEN_WEATHER_API_URL,required"`
+		ApiKey string `env:"OPEN_WEATHER_API_KEY,required"`
 	}
 )
 
 // NewConfig returns app config.
 func NewConfig() (*Config, error) {
 	cfg := &Config{}
+
 	if err := env.Parse(cfg); err != nil {
 		return nil, fmt.Errorf("config error: %w", err)
 	}

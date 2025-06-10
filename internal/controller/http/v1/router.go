@@ -11,8 +11,8 @@ import (
 func NewWeatherRoutes(apiV1Group fiber.Router, w *weather.UseCase, l logger.Interface) {
 	r := &V1{w: w, l: l, v: validator.New(validator.WithRequiredStructEnabled())}
 
-	translationGroup := apiV1Group.Group("/weather")
+	weatherGroup := apiV1Group.Group("/weather")
 	{
-		translationGroup.Get("/", r.weatherByCoordinates)
+		weatherGroup.Get("/", r.weatherByCoordinates)
 	}
 }
