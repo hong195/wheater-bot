@@ -20,7 +20,7 @@ import (
 // @description Using a weather service as an example
 // @version     1.0
 // @host        localhost:8080
-// @BasePath    /v1
+// @BasePath    /api/v1
 func NewRouter(app *fiber.App, cfg *config.Config, w *weather.UseCase, l logger.Interface) {
 	// Options
 	app.Use(middleware.Logger(l))
@@ -29,7 +29,7 @@ func NewRouter(app *fiber.App, cfg *config.Config, w *weather.UseCase, l logger.
 	// Prometheus metrics
 	if cfg.Metrics.Enabled {
 		prometheus := fiberprometheus.New("weather-bot")
-		prometheus.RegisterAt(app, "/metrics")
+		prometheus.RegisterAt(app, "metrics")
 		app.Use(prometheus.Middleware)
 	}
 
@@ -42,7 +42,6 @@ func NewRouter(app *fiber.App, cfg *config.Config, w *weather.UseCase, l logger.
 	app.Get("/healthz", func(ctx *fiber.Ctx) error { return ctx.SendStatus(http.StatusOK) })
 
 	// Routers
-
 	apiV1Group := app.Group("api/v1")
 	{
 		v1.NewWeatherRoutes(apiV1Group, w, l)

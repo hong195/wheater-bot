@@ -7,9 +7,8 @@ import (
 	"github.com/hong195/wheater-bot/internal/entity"
 	"net/http"
 	"net/url"
+	"strconv"
 )
-
-const reverseGeocodingUrl = "https://nominatim.openstreetmap.org/reverse"
 
 type addressApiResponse struct {
 	Address struct {
@@ -18,15 +17,18 @@ type addressApiResponse struct {
 	} `json:"address"`
 }
 
-type CityDetailsRepository struct{}
-
-func NewCityDetailsRepository() *CityDetailsRepository {
-	return &CityDetailsRepository{}
+type CityDetailsRepository struct {
+	httpClient *http.Client
+	apiUrl     string
 }
 
-func (c *CityDetailsRepository) GetCityDetailsByCoordinates(ctx context.Context, lat, lon string) (*entity.CityDetails, error) {
+func NewCityDetailsRepository(httpClient *http.Client, apiUrl string) *CityDetailsRepository {
+	return &CityDetailsRepository{httpClient, apiUrl}
+}
 
-	u, err := url.Parse(reverseGeocodingUrl)
+func (c *CityDetailsRepository) GetCityDetailsByCoordinates(ctx context.Context, lat, lon float64) (*entity.CityDetails, error) {
+
+	u, err := url.Parse(c.apiUrl)
 
 	if err != nil {
 		return nil, err
@@ -34,11 +36,11 @@ func (c *CityDetailsRepository) GetCityDetailsByCoordinates(ctx context.Context,
 
 	q := u.Query()
 	q.Set("format", "json")
-	q.Set("lat", lat)
-	q.Set("lon", lon)
+	q.Set("lat", strconv.FormatFloat(lat, 'f', -1, 64))
+	q.Set("lon", strconv.FormatFloat(lon, 'f', -1, 64))
 	u.RawQuery = q.Encode()
 
-	response, err := http.Get(u.String())
+	response, err := c.httpClient.Get(u.String())
 
 	if err != nil {
 		return nil, err

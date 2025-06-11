@@ -3,6 +3,7 @@ package weather
 import (
 	"context"
 	"github.com/hong195/wheater-bot/internal/entity"
+	"sync"
 )
 
 // UseCase -.
@@ -19,26 +20,52 @@ func New(cr entity.CityDetailRepository, wr entity.WeatherRepository) *UseCase {
 	}
 }
 
-func (uc *UseCase) GetWeatherByCoordinates(ctx context.Context, lat, lon string) (*Weather, error) {
+func (uc *UseCase) GetWeatherByCoordinates(ctx context.Context, lat, lon float64) (*Weather, error) {
 
-	weather, err := uc.weatherRepo.GetWeatherByCoordinates(ctx, lon, lat)
+	var (
+		weather        *entity.Weather
+		weatherErr     error
+		cityDetails    *entity.CityDetails
+		cityDetailsErr error
+	)
 
-	if err != nil {
-		return nil, err
+	wg := &sync.WaitGroup{}
+
+	wg.Add(2)
+	go func() {
+		defer wg.Done()
+		weather, weatherErr = uc.weatherRepo.GetWeatherByCoordinates(ctx, lon, lat)
+	}()
+
+	go func() {
+		defer wg.Done()
+
+		defer func() {
+			if r := recover(); r != nil {
+				cityDetailsErr = r.(error)
+			}
+		}()
+		cityDetails, cityDetailsErr = uc.cityDetailsRepo.GetCityDetailsByCoordinates(ctx, lat, lon)
+	}()
+
+	wg.Wait()
+
+	if weatherErr != nil {
+		return nil, weatherErr
 	}
 
-	cityDetails, err := uc.cityDetailsRepo.GetCityDetailsByCoordinates(ctx, lat, lon)
-
-	if err != nil {
-		return nil, err
+	if cityDetailsErr != nil {
+		return nil, cityDetailsErr
 	}
 
 	return &Weather{
+		weather.Sunrise,
+		weather.Sunset,
 		weather.Temperature,
 		weather.FeelsLike,
 		weather.Humidity,
 		weather.WindSpeed,
-		weather.Description,
+		"Cloudy",
 		cityDetails.City,
 		cityDetails.Country,
 	}, nil
