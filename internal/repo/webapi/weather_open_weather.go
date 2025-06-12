@@ -26,7 +26,7 @@ func NewWeatherWebApi(httpClient *http.Client, apiKey, baseUrl string) *WeatherW
 	}
 }
 
-type weatherWebApiResponse struct {
+type WeatherWebApiResponse struct {
 	Current struct {
 		Sunrise    int     `json:"sunrise"`
 		Sunset     int     `json:"sunset"`
@@ -39,10 +39,8 @@ type weatherWebApiResponse struct {
 		WindDeg    int     `json:"wind_deg"`
 		WindGust   float64 `json:"wind_gust"`
 		Weather    []struct {
-			Id          int    `json:"id"`
-			Main        string `json:"main"`
 			Description string `json:"description"`
-		} `json:"weather"`
+		}
 	} `json:"current"`
 }
 
@@ -56,6 +54,7 @@ func (w *WeatherWebApi) GetWeatherByCoordinates(ctx context.Context, lat, lon fl
 	}
 
 	q := u.Query()
+	q.Set("format", "json")
 	q.Set("lat", strconv.FormatFloat(lat, 'f', -1, 64))
 	q.Set("lon", strconv.FormatFloat(lon, 'f', -1, 64))
 	q.Set("appid", w.ApiKey)
@@ -76,16 +75,25 @@ func (w *WeatherWebApi) GetWeatherByCoordinates(ctx context.Context, lat, lon fl
 		return nil, fmt.Errorf("weather API returned non-OK status: %d, body: %s", response.StatusCode, string(body))
 	}
 
-	var apiResponse weatherWebApiResponse
+	var apiResponse WeatherWebApiResponse
 
 	if err := json.NewDecoder(response.Body).Decode(&apiResponse); err != nil {
 		return nil, fmt.Errorf("failed to decode weather API response: %w", err)
 	}
 
+	desc := ""
+
+	if apiResponse.Current.Weather[0].Description != "" {
+		desc = apiResponse.Current.Weather[0].Description
+	}
+
 	return &entity.Weather{
+		Sunrise:     apiResponse.Current.Sunrise,
+		Sunset:      apiResponse.Current.Sunset,
 		Temperature: apiResponse.Current.Temp,
 		Humidity:    apiResponse.Current.Humidity,
 		FeelsLike:   apiResponse.Current.FeelsLike,
 		WindSpeed:   apiResponse.Current.WindSpeed,
+		Description: desc,
 	}, nil
 }
