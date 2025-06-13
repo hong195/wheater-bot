@@ -61,7 +61,7 @@ func (uc *UseCase) GetWeatherByCoordinates(ctx context.Context, lat, lon float64
 		weather.FeelsLike,
 		weather.Humidity,
 		weather.WindSpeed,
-		"Cloudy",
+		weather.Description,
 		cityDetails.City,
 		cityDetails.Country,
 	}, nil

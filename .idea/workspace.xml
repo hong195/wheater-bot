@@ -6,8 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="d5af7a4d-927f-4e54-a90c-f5dd60ada04c" name="Changes" comment="Add in-memory repositories for city and weather details with basic data and retrieval methods">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/entity/city_details.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/entity/city_details.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/repo/webapi/city_details_openstreetmap.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/repo/webapi/city_details_openstreetmap.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/repo/webapi/city_details_openstreetmap_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/repo/webapi/city_details_openstreetmap_test.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/usecase/weather/weather.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/usecase/weather/weather.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/usecase/weather/weather_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/usecase/weather/weather_test.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,7 +105,19 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Test.TestItFailsIfRepoCallFails in github.com/hong195/wheater-bot/internal/usecase/weather">
+  <component name="RunManager" selected="Go Test.TestCityRepoCanFetchDetailsByLatLon in github.com/hong195/wheater-bot/internal/repo/webapi">
+    <configuration name="TestCityRepoCanFetchDetailsByLatLon in github.com/hong195/wheater-bot/internal/repo/webapi" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="goweatherbot" />
+      <working_directory value="$PROJECT_DIR$/internal/repo/webapi" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="github.com/hong195/wheater-bot/internal/repo/webapi" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestCityRepoCanFetchDetailsByLatLon\E$" />
+      <method v="2" />
+    </configuration>
     <configuration name="TestDescriptionMightBeEmpty in github.com/hong195/wheater-bot/internal/repo/webapi" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="goweatherbot" />
       <working_directory value="$PROJECT_DIR$/internal/repo/webapi" />
@@ -114,18 +128,6 @@
       <filePath value="$PROJECT_DIR$" />
       <framework value="gotest" />
       <pattern value="^\QTestDescriptionMightBeEmpty\E$" />
-      <method v="2" />
-    </configuration>
-    <configuration name="TestFailsIfJsonIsBroken in github.com/hong195/wheater-bot/internal/repo/webapi" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="goweatherbot" />
-      <working_directory value="$PROJECT_DIR$/internal/repo/webapi" />
-      <root_directory value="$PROJECT_DIR$" />
-      <kind value="PACKAGE" />
-      <package value="github.com/hong195/wheater-bot/internal/repo/webapi" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$" />
-      <framework value="gotest" />
-      <pattern value="^\QTestFailsIfJsonIsBroken\E$" />
       <method v="2" />
     </configuration>
     <configuration name="TestGetWeatherDetailsByCoordinates in github.com/hong195/wheater-bot/internal/usecase/weather" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
@@ -168,11 +170,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Test.TestCityRepoCanFetchDetailsByLatLon in github.com/hong195/wheater-bot/internal/repo/webapi" />
         <item itemvalue="Go Test.TestItFailsIfRepoCallFails in github.com/hong195/wheater-bot/internal/usecase/weather" />
         <item itemvalue="Go Test.TestGetWeatherDetailsByCoordinates in github.com/hong195/wheater-bot/internal/usecase/weather" />
         <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
         <item itemvalue="Go Test.TestDescriptionMightBeEmpty in github.com/hong195/wheater-bot/internal/repo/webapi" />
-        <item itemvalue="Go Test.TestFailsIfJsonIsBroken in github.com/hong195/wheater-bot/internal/repo/webapi" />
       </list>
     </recent_temporary>
   </component>
@@ -221,16 +223,16 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/internal/repo/webapi/city_details_openstreetmap.go</url>
-          <line>32</line>
-          <option name="timeStamp" value="52" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/internal/repo/webapi/city_details_openstreetmap.go</url>
-          <line>30</line>
-          <option name="timeStamp" value="53" />
+          <line>63</line>
+          <option name="timeStamp" value="80" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="GoTestRunConfiguration">
+        <watch expression="*(*&quot;net/http.Response&quot;)(1374390648976)" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/goweatherbot$TestFailsIfApiUrlIsInvalid_in_github_com_hong195_wheater_bot_internal_repo_webapi.out" NAME="TestFailsIfApiUrlIsInvalid in github.com/hong195/wheater-bot/internal/repo/webapi Coverage Results" MODIFIED="1749722080939" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

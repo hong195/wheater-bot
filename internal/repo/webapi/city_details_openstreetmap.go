@@ -12,8 +12,11 @@ import (
 
 type addressApiResponse struct {
 	Address struct {
-		County string `json:"county"`
-		City   string `json:"city"`
+		County       string `json:"county"`
+		Country      string `json:"country"`
+		City         string `json:"city"`
+		PostCode     string `json:"postcode"`
+		Neighborhood string `json:"neighbourhood"`
 	} `json:"address"`
 }
 
@@ -38,6 +41,7 @@ func (c *CityDetailsRepository) GetCityDetailsByCoordinates(ctx context.Context,
 	q.Set("format", "json")
 	q.Set("lat", strconv.FormatFloat(lat, 'f', -1, 64))
 	q.Set("lon", strconv.FormatFloat(lon, 'f', -1, 64))
+	q.Set("accept-language", "ru")
 	u.RawQuery = q.Encode()
 
 	response, err := c.httpClient.Get(u.String())
@@ -58,7 +62,10 @@ func (c *CityDetailsRepository) GetCityDetailsByCoordinates(ctx context.Context,
 	}
 
 	return &entity.CityDetails{
-		City:    apiResponse.Address.City,
-		Country: apiResponse.Address.County,
+		City:          apiResponse.Address.City,
+		Country:       apiResponse.Address.Country,
+		County:        apiResponse.Address.County,
+		PostCode:      apiResponse.Address.PostCode,
+		Neighbourhood: apiResponse.Address.Neighborhood,
 	}, nil
 }

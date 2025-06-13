@@ -7,6 +7,9 @@ type CityDetailRepository interface {
 }
 
 type CityDetails struct {
-	City    string
-	Country string
+	City          string
+	Country       string
+	County        string
+	Neighbourhood string
+	PostCode      string
 }

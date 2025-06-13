@@ -40,7 +40,15 @@ func TestCityRepoCanFetchDetailsByLatLon(t *testing.T) {
 	mockTransport, client := getMockHttpClient()
 
 	repo := NewCityDetailsRepository(client, testUrl)
-	body := `{"address": {"county": "Uzbekistan","city": "Tashkent"}}`
+	body := `{
+			  "address": {
+				"country": "Узбекистан",
+				"city": "Ташкент",
+				"county": "Чиланзарский район", 
+				"postcode": "100000",
+				"neighbourhood": "Бешагач махалля"
+			  }
+			}`
 
 	response := &http.Response{
 		StatusCode: 200,
@@ -52,8 +60,11 @@ func TestCityRepoCanFetchDetailsByLatLon(t *testing.T) {
 
 	res, _ := repo.GetCityDetailsByCoordinates(context.TODO(), testLat, testLon)
 	exp := &entity.CityDetails{
-		City:    "Tashkent",
-		Country: "Uzbekistan",
+		Country:       "Узбекистан",
+		City:          "Ташкент",
+		County:        "Чиланзарский район",
+		PostCode:      "100000",
+		Neighbourhood: "Бешагач махалля",
 	}
 
 	assert.NotNil(t, repo)
