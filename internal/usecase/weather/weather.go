@@ -21,7 +21,6 @@ func NewUseCase(cr entity.CityDetailRepository, wr entity.WeatherRepository) *Us
 }
 
 func (uc *UseCase) GetWeatherByCoordinates(ctx context.Context, lat, lon float64) (*Weather, error) {
-
 	var (
 		weather     *entity.Weather
 		cityDetails *entity.CityDetails
@@ -30,7 +29,6 @@ func (uc *UseCase) GetWeatherByCoordinates(ctx context.Context, lat, lon float64
 	g, ctx := errgroup.WithContext(ctx)
 
 	g.Go(func() error {
-
 		res, err := uc.weatherRepo.GetWeatherByCoordinates(ctx, lon, lat)
 
 		if err != nil {

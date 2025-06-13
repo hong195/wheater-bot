@@ -2,6 +2,7 @@ package weather
 
 import (
 	"context"
+	"github.com/hong195/wheater-bot/internal/entity"
 	"github.com/hong195/wheater-bot/internal/repo/webapi"
 	"github.com/stretchr/testify/assert"
 	"testing"
@@ -41,4 +42,40 @@ func TestGetWeatherDetailsByCoordinates(t *testing.T) {
 	assert.Nil(t, err, "error should be nil")
 	assert.NotNil(t, res, "result should not be nil")
 	assert.Equal(t, expectedRes, res, "result should be equal")
+}
+
+func TestItFailsIfRepoCallFails(t *testing.T) {
+
+	type testCase struct {
+		Name        string
+		Coords      entity.Coords
+		ExpectedErr error
+	}
+
+	testCases := []testCase{
+		{
+			Name: "invalid coords",
+			Coords: entity.Coords{
+				Latitude:  0,
+				Longitude: 0,
+			},
+			ExpectedErr: entity.NotFoundError,
+		},
+		{
+			Name: "invalid latitude",
+			Coords: entity.Coords{
+				Latitude:  0,
+				Longitude: longitude,
+			},
+			ExpectedErr: entity.NotFoundError,
+		},
+	}
+
+	useCase := getUseCase()
+	for _, tc := range testCases {
+		res, err := useCase.GetWeatherByCoordinates(context.TODO(), tc.Coords.Latitude, tc.Coords.Longitude)
+
+		assert.Nil(t, res, "result should be nil, one the repo call fails")
+		assert.NotNil(t, err, "error should not be nil")
+	}
 }
