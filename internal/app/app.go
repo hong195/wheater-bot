@@ -35,7 +35,7 @@ func Run(cfg *config.Config) {
 
 	cityDetailRepo := webapi.NewCityDetailsRepository(httpClient, reverseGeocodingUrl)
 	// Use-Case
-	weatherUseCase := weather.New(cityDetailRepo, weatherRepo)
+	weatherUseCase := weather.NewUseCase(cityDetailRepo, weatherRepo)
 
 	// HTTP Server
 	httpServer := httpserver.New(httpserver.Port(cfg.HTTP.Port), httpserver.Prefork(cfg.HTTP.UsePreforkMode))

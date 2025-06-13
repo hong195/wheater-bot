@@ -4,11 +4,17 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d5af7a4d-927f-4e54-a90c-f5dd60ada04c" name="Changes" comment="Refactor weather and city details functionality to use HTTP client with improved error handling and response parsing">
-      <change afterPath="$PROJECT_DIR$/internal/repo/webapi/weather_open_weather_test.go" afterDir="false" />
+    <list default="true" id="d5af7a4d-927f-4e54-a90c-f5dd60ada04c" name="Changes" comment="Refactor weather API response handling and add unit tests for error scenarios">
+      <change afterPath="$PROJECT_DIR$/internal/entity/common.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/repo/webapi/in_memory_city_repo.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/repo/webapi/in_memory_weather_repo.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/usecase/weather/weather_test.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/repo/webapi/weather_open_weather.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/repo/webapi/weather_open_weather.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/app/app.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/app/app.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/usecase/weather/weather.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/usecase/weather/weather.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,7 +28,7 @@
       </list>
     </option>
   </component>
-  <component name="GOROOT" url="file:///opt/homebrew/opt/go/libexec" />
+  <component name="GOROOT" url="file://$USER_HOME$/.gvm/pkgsets/go1.22.3/global/pkg/mod/golang.org/toolchain@v0.0.1-go1.23.10.darwin-arm64" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -68,6 +74,7 @@
     "Go Test.TestFailsIfReturnNot200Ok in github.com/hong195/wheater-bot/internal/repo/webapi.executor": "Run",
     "Go Test.TestGetCityDetailsByCoordinatesFailsIfCantParseJson in github.com/hong195/wheater-bot/internal/repo/webapi.executor": "Debug",
     "Go Test.TestGetWeatherDetails in github.com/hong195/wheater-bot/internal/repo/webapi.executor": "Debug",
+    "Go Test.TestGetWeatherDetailsByCoordinates in github.com/hong195/wheater-bot/internal/usecase/weather.executor": "Debug",
     "Go Test.TestNewCityDetailsRepository in github.com/hong195/wheater-bot/internal/repo/webapi.executor": "Run",
     "Go Test.TestRepoInnerApiCallAccepts200Status in github.com/hong195/wheater-bot/internal/repo/webapi.executor": "Debug",
     "Go Test.TestRepoReturnsErrorIfApiUrlIsInvalid in github.com/hong195/wheater-bot/internal/repo/webapi.executor": "Run",
@@ -81,16 +88,17 @@
     "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
     "git-widget-placeholder": "master",
     "go.import.settings.migrated": "true",
-    "last_opened_file_path": "/Users/aleksejem/Sites/goweatherbot/internal/repo/webapi",
+    "last_opened_file_path": "/Users/aleksejem/Sites/goweatherbot/internal/usecase/weather",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "onboarding.tips.debug.path": "/Users/aleksejem/Sites/goweatherbot/main.go",
-    "settings.editor.selected.configurable": "preferences.general"
+    "settings.editor.selected.configurable": "go.custom.fmt.functions"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/internal/usecase/weather" />
       <recent name="$PROJECT_DIR$/internal/repo/webapi" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/config" />
@@ -101,7 +109,7 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Docker.docker-compose.yml: Compose Deployment">
+  <component name="RunManager" selected="Go Test.TestGetWeatherDetailsByCoordinates in github.com/hong195/wheater-bot/internal/usecase/weather">
     <configuration name="TestDescriptionMightBeEmpty in github.com/hong195/wheater-bot/internal/repo/webapi" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="goweatherbot" />
       <working_directory value="$PROJECT_DIR$/internal/repo/webapi" />
@@ -112,18 +120,6 @@
       <filePath value="$PROJECT_DIR$" />
       <framework value="gotest" />
       <pattern value="^\QTestDescriptionMightBeEmpty\E$" />
-      <method v="2" />
-    </configuration>
-    <configuration name="TestFailsIfApiKeyIsInvalid in github.com/hong195/wheater-bot/internal/repo/webapi" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="goweatherbot" />
-      <working_directory value="$PROJECT_DIR$/internal/repo/webapi" />
-      <root_directory value="$PROJECT_DIR$" />
-      <kind value="PACKAGE" />
-      <package value="github.com/hong195/wheater-bot/internal/repo/webapi" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$" />
-      <framework value="gotest" />
-      <pattern value="^\QTestFailsIfApiKeyIsInvalid\E$" />
       <method v="2" />
     </configuration>
     <configuration name="TestFailsIfJsonIsBroken in github.com/hong195/wheater-bot/internal/repo/webapi" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
@@ -150,6 +146,18 @@
       <pattern value="^\QTestFailsIfReturnNot200Ok\E$" />
       <method v="2" />
     </configuration>
+    <configuration name="TestGetWeatherDetailsByCoordinates in github.com/hong195/wheater-bot/internal/usecase/weather" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="goweatherbot" />
+      <working_directory value="$PROJECT_DIR$/internal/usecase/weather" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="github.com/hong195/wheater-bot/internal/usecase/weather" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestGetWeatherDetailsByCoordinates\E$" />
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
       <deployment type="docker-compose.yml">
         <settings />
@@ -166,11 +174,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Test.TestGetWeatherDetailsByCoordinates in github.com/hong195/wheater-bot/internal/usecase/weather" />
         <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
         <item itemvalue="Go Test.TestDescriptionMightBeEmpty in github.com/hong195/wheater-bot/internal/repo/webapi" />
         <item itemvalue="Go Test.TestFailsIfJsonIsBroken in github.com/hong195/wheater-bot/internal/repo/webapi" />
         <item itemvalue="Go Test.TestFailsIfReturnNot200Ok in github.com/hong195/wheater-bot/internal/repo/webapi" />
-        <item itemvalue="Go Test.TestFailsIfApiKeyIsInvalid in github.com/hong195/wheater-bot/internal/repo/webapi" />
       </list>
     </recent_temporary>
   </component>
