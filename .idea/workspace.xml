@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d5af7a4d-927f-4e54-a90c-f5dd60ada04c" name="Changes" comment="Add in-memory repositories for city and weather details with basic data and retrieval methods">
+    <list default="true" id="d5af7a4d-927f-4e54-a90c-f5dd60ada04c" name="Changes" comment="Enhance city details structure and API response handling with additional fields">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/entity/city_details.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/entity/city_details.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/repo/webapi/city_details_openstreetmap.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/repo/webapi/city_details_openstreetmap.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/repo/webapi/city_details_openstreetmap_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/repo/webapi/city_details_openstreetmap_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/usecase/weather/types.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/usecase/weather/types.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/usecase/weather/weather.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/usecase/weather/weather.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -213,7 +211,8 @@
     <MESSAGE value="Add configuration files and Docker setup for weather and city details functionality" />
     <MESSAGE value="Refactor weather and city details functionality to use HTTP client with improved error handling and response parsing" />
     <MESSAGE value="Add in-memory repositories for city and weather details with basic data and retrieval methods" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add in-memory repositories for city and weather details with basic data and retrieval methods" />
+    <MESSAGE value="Enhance city details structure and API response handling with additional fields" />
+    <option name="LAST_COMMIT_MESSAGE" value="Enhance city details structure and API response handling with additional fields" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

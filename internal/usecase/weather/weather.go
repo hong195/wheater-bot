@@ -55,14 +55,18 @@ func (uc *UseCase) GetWeatherByCoordinates(ctx context.Context, lat, lon float64
 	}
 
 	return &Weather{
-		weather.Sunrise,
-		weather.Sunset,
-		weather.Temperature,
-		weather.FeelsLike,
-		weather.Humidity,
-		weather.WindSpeed,
-		weather.Description,
-		cityDetails.City,
-		cityDetails.Country,
+		Sunrise:     weather.Sunrise,
+		Sunset:      weather.Sunset,
+		Temperature: weather.Temperature,
+		FeelsLike:   weather.FeelsLike,
+		Humidity:    weather.Humidity,
+		WindSpeed:   weather.WindSpeed,
+		Description: weather.Description,
+
+		City:         cityDetails.City,
+		Country:      cityDetails.Country,
+		PostCode:     cityDetails.PostCode,
+		County:       cityDetails.County,
+		Neighborhood: cityDetails.Neighbourhood,
 	}, nil
 }
