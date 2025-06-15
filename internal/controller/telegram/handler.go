@@ -60,9 +60,6 @@ func (h *Handler) UnknownCommand() error {
 
 func (h *Handler) GetWeatherCommand(context context.Context, lat, lon float64) error {
 
-	fmt.Println(
-		"lat: ", lat,
-		"lon: ", lon)
 	res, err := h.useCase.GetWeatherByCoordinates(context, lat, lon)
 
 	if err != nil {

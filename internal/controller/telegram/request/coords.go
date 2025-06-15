@@ -8,9 +8,8 @@ import (
 )
 
 var (
-	invalidCoordsErr = errors.New("incorrect coords format")
-	separatorErr     = errors.New("coords should be separated by comma")
-	parseErr         = errors.New("error parsing coordinates")
+	separatorErr = errors.New("coords should be separated by comma")
+	parseErr     = errors.New("error parsing coordinates")
 )
 
 type Coords struct {
