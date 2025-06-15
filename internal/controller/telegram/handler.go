@@ -8,13 +8,17 @@ import (
 	"time"
 )
 
+type Sender interface {
+	Send(c tgbotapi.Chattable) (tgbotapi.Message, error)
+}
+
 type Handler struct {
-	botApi  *tgbotapi.BotAPI
+	botApi  Sender
 	chatID  int64
 	useCase *weather.UseCase
 }
 
-func NewHandler(botApi *tgbotapi.BotAPI, chatID int64, useCase *weather.UseCase) *Handler {
+func NewHandler(botApi Sender, chatID int64, useCase *weather.UseCase) *Handler {
 	return &Handler{
 		botApi:  botApi,
 		chatID:  chatID,

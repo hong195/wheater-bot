@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d5af7a4d-927f-4e54-a90c-f5dd60ada04c" name="Changes" comment="Refactor Telegram bot command handling and introduce coordinate parsing functionality">
+    <list default="true" id="d5af7a4d-927f-4e54-a90c-f5dd60ada04c" name="Changes" comment="Refactor Telegram bot command handling and remove unused coordinate parsing code">
+      <change afterPath="$PROJECT_DIR$/internal/controller/telegram/handler_test.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/controller/telegram/bot.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/controller/telegram/bot.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/controller/telegram/handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/controller/telegram/handler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/controller/telegram/request/coords.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/controller/telegram/request/coords.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/repo/webapi/in_memory_city_repo.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/repo/webapi/in_memory_city_repo.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/usecase/weather/weather_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/usecase/weather/weather_test.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,6 +69,8 @@
     "Go Test.TestFailsIfJsonIsBroken in github.com/hong195/wheater-bot/internal/repo/webapi.executor": "Run",
     "Go Test.TestFailsIfReturnNot200Ok in github.com/hong195/wheater-bot/internal/repo/webapi.executor": "Run",
     "Go Test.TestGetCityDetailsByCoordinatesFailsIfCantParseJson in github.com/hong195/wheater-bot/internal/repo/webapi.executor": "Debug",
+    "Go Test.TestGetWeatherCommand in github.com/hong195/wheater-bot/internal/controller/telegram.executor": "Run",
+    "Go Test.TestGetWeatherCommand_Error in github.com/hong195/wheater-bot/internal/controller/telegram.executor": "Run",
     "Go Test.TestGetWeatherDetails in github.com/hong195/wheater-bot/internal/repo/webapi.executor": "Run",
     "Go Test.TestGetWeatherDetailsByCoordinates in github.com/hong195/wheater-bot/internal/usecase/weather.executor": "Debug",
     "Go Test.TestItFailsIfRepoCallFails in github.com/hong195/wheater-bot/internal/usecase/weather.executor": "Run",
@@ -107,7 +110,7 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Test.TestParsingCoordsFromStrings in github.com/hong195/wheater-bot/internal/controller/telegram/request">
+  <component name="RunManager" selected="Go Test.TestGetWeatherCommand_Error in github.com/hong195/wheater-bot/internal/controller/telegram">
     <configuration name="TestCantHandleFailedApiInnerRequest in github.com/hong195/wheater-bot/internal/repo/webapi" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="goweatherbot" />
       <working_directory value="$PROJECT_DIR$/internal/repo/webapi" />
@@ -120,16 +123,28 @@
       <pattern value="^\QTestCantHandleFailedApiInnerRequest\E$" />
       <method v="2" />
     </configuration>
-    <configuration name="TestGetWeatherDetails in github.com/hong195/wheater-bot/internal/repo/webapi" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+    <configuration name="TestGetWeatherCommand in github.com/hong195/wheater-bot/internal/controller/telegram" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="goweatherbot" />
-      <working_directory value="$PROJECT_DIR$/internal/repo/webapi" />
+      <working_directory value="$PROJECT_DIR$/internal/controller/telegram" />
       <root_directory value="$PROJECT_DIR$" />
       <kind value="PACKAGE" />
-      <package value="github.com/hong195/wheater-bot/internal/repo/webapi" />
+      <package value="github.com/hong195/wheater-bot/internal/controller/telegram" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$" />
       <framework value="gotest" />
-      <pattern value="^\QTestGetWeatherDetails\E$" />
+      <pattern value="^\QTestGetWeatherCommand\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestGetWeatherCommand_Error in github.com/hong195/wheater-bot/internal/controller/telegram" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="goweatherbot" />
+      <working_directory value="$PROJECT_DIR$/internal/controller/telegram" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="github.com/hong195/wheater-bot/internal/controller/telegram" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestGetWeatherCommand_Error\E$" />
       <method v="2" />
     </configuration>
     <configuration name="TestGetWeatherDetailsByCoordinates in github.com/hong195/wheater-bot/internal/usecase/weather" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
@@ -142,18 +157,6 @@
       <filePath value="$PROJECT_DIR$" />
       <framework value="gotest" />
       <pattern value="^\QTestGetWeatherDetailsByCoordinates\E$" />
-      <method v="2" />
-    </configuration>
-    <configuration name="TestItFailsIfRepoCallFails in github.com/hong195/wheater-bot/internal/usecase/weather" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="goweatherbot" />
-      <working_directory value="$PROJECT_DIR$/internal/usecase/weather" />
-      <root_directory value="$PROJECT_DIR$" />
-      <kind value="PACKAGE" />
-      <package value="github.com/hong195/wheater-bot/internal/usecase/weather" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$" />
-      <framework value="gotest" />
-      <pattern value="^\QTestItFailsIfRepoCallFails\E$" />
       <method v="2" />
     </configuration>
     <configuration name="TestParsingCoordsFromStrings in github.com/hong195/wheater-bot/internal/controller/telegram/request" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
@@ -176,11 +179,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Test.TestGetWeatherCommand_Error in github.com/hong195/wheater-bot/internal/controller/telegram" />
+        <item itemvalue="Go Test.TestGetWeatherCommand in github.com/hong195/wheater-bot/internal/controller/telegram" />
         <item itemvalue="Go Test.TestGetWeatherDetailsByCoordinates in github.com/hong195/wheater-bot/internal/usecase/weather" />
         <item itemvalue="Go Test.TestParsingCoordsFromStrings in github.com/hong195/wheater-bot/internal/controller/telegram/request" />
         <item itemvalue="Go Test.TestCantHandleFailedApiInnerRequest in github.com/hong195/wheater-bot/internal/repo/webapi" />
-        <item itemvalue="Go Test.TestItFailsIfRepoCallFails in github.com/hong195/wheater-bot/internal/usecase/weather" />
-        <item itemvalue="Go Test.TestGetWeatherDetails in github.com/hong195/wheater-bot/internal/repo/webapi" />
       </list>
     </recent_temporary>
   </component>
@@ -223,7 +226,8 @@
     <MESSAGE value="Enhance city details structure by adding postcode and neighborhood fields" />
     <MESSAGE value="Integrate Telegram bot functionality for weather updates and command handling" />
     <MESSAGE value="Refactor Telegram bot command handling and introduce coordinate parsing functionality" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactor Telegram bot command handling and introduce coordinate parsing functionality" />
+    <MESSAGE value="Refactor Telegram bot command handling and remove unused coordinate parsing code" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor Telegram bot command handling and remove unused coordinate parsing code" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

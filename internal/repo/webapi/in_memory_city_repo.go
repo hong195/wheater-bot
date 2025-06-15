@@ -20,8 +20,10 @@ func getFakeData() map[entity.Coords]entity.CityDetails {
 	storage := make(map[entity.Coords]entity.CityDetails)
 
 	storage[entity.Coords{Latitude: 41.311081, Longitude: 69.240562}] = entity.CityDetails{
-		City:    "Tashkent",
-		Country: "Uzbekistan",
+		City:          "Tashkent",
+		Country:       "Uzbekistan",
+		County:        "Tashkent",
+		Neighbourhood: "Tashkent",
 	}
 
 	return storage

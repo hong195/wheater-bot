@@ -32,8 +32,11 @@ func TestGetWeatherDetailsByCoordinates(t *testing.T) {
 		Humidity:    0,
 		WindSpeed:   0,
 		Description: "Cloudy",
-		City:        "Tashkent",
-		Country:     "Uzbekistan",
+
+		City:         "Tashkent",
+		Country:      "Uzbekistan",
+		County:       "Tashkent",
+		Neighborhood: "Tashkent",
 	}
 
 	res, err := useCase.GetWeatherByCoordinates(context.TODO(), latitude, longitude)
