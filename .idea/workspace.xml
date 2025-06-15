@@ -4,21 +4,15 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d5af7a4d-927f-4e54-a90c-f5dd60ada04c" name="Changes" comment="Enhance city details structure by adding postcode and neighborhood fields">
-      <change afterPath="$PROJECT_DIR$/Dockerfile.dev" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/controller/telegram/bot.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/controller/telegram/handler.go" afterDir="false" />
+    <list default="true" id="d5af7a4d-927f-4e54-a90c-f5dd60ada04c" name="Changes" comment="Integrate Telegram bot functionality for weather updates and command handling">
+      <change afterPath="$PROJECT_DIR$/internal/controller/telegram/commands.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/controller/telegram/request/coords.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/controller/telegram/request/coords_test.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/controller/telegram/router.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/controller/telegram/webhook.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/app/app.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/app/app.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/entity/weather.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/entity/weather.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/repo/webapi/city_details_openstreetmap.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/repo/webapi/city_details_openstreetmap.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/repo/webapi/in_memory_city_repo.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/repo/webapi/in_memory_city_repo.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/repo/webapi/in_memory_weather_repo.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/repo/webapi/in_memory_weather_repo.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/usecase/weather/weather.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/usecase/weather/weather.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/controller/telegram/bot.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/controller/telegram/bot.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/controller/telegram/handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/controller/telegram/handler.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,6 +76,7 @@
     "Go Test.TestGetWeatherDetailsByCoordinates in github.com/hong195/wheater-bot/internal/usecase/weather.executor": "Debug",
     "Go Test.TestItFailsIfRepoCallFails in github.com/hong195/wheater-bot/internal/usecase/weather.executor": "Run",
     "Go Test.TestNewCityDetailsRepository in github.com/hong195/wheater-bot/internal/repo/webapi.executor": "Run",
+    "Go Test.TestParsingCoordsFromStrings in github.com/hong195/wheater-bot/internal/controller/telegram/request.executor": "Run",
     "Go Test.TestRepoInnerApiCallAccepts200Status in github.com/hong195/wheater-bot/internal/repo/webapi.executor": "Debug",
     "Go Test.TestRepoReturnsErrorIfApiUrlIsInvalid in github.com/hong195/wheater-bot/internal/repo/webapi.executor": "Run",
     "Makefile Target.compose-up-all.executor": "Run",
@@ -94,7 +89,7 @@
     "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
     "git-widget-placeholder": "master",
     "go.import.settings.migrated": "true",
-    "last_opened_file_path": "/Users/aleksejem/Sites/goweatherbot",
+    "last_opened_file_path": "/Users/aleksejem/Sites/goweatherbot/internal/controller/telegram/request",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
@@ -104,11 +99,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/internal/controller/telegram/request" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/internal/controller/http/v1/telegram" />
       <recent name="$PROJECT_DIR$/internal/usecase/weather" />
       <recent name="$PROJECT_DIR$/internal/repo/webapi" />
-      <recent name="$PROJECT_DIR$/config" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/internal/repo/webapi" />
@@ -116,7 +111,7 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Test.TestCantHandleFailedApiInnerRequest in github.com/hong195/wheater-bot/internal/repo/webapi">
+  <component name="RunManager" selected="Go Test.TestParsingCoordsFromStrings in github.com/hong195/wheater-bot/internal/controller/telegram/request">
     <configuration name="TestCantHandleFailedApiInnerRequest in github.com/hong195/wheater-bot/internal/repo/webapi" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="goweatherbot" />
       <working_directory value="$PROJECT_DIR$/internal/repo/webapi" />
@@ -165,27 +160,31 @@
       <pattern value="^\QTestItFailsIfRepoCallFails\E$" />
       <method v="2" />
     </configuration>
+    <configuration name="TestParsingCoordsFromStrings in github.com/hong195/wheater-bot/internal/controller/telegram/request" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="goweatherbot" />
+      <working_directory value="$PROJECT_DIR$/internal/controller/telegram/request" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="github.com/hong195/wheater-bot/internal/controller/telegram/request" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestParsingCoordsFromStrings\E$" />
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
       <deployment type="docker-compose.yml">
         <settings />
       </deployment>
       <method v="2" />
     </configuration>
-    <configuration name="docker-compose.yml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
-      <deployment type="docker-compose.yml">
-        <settings>
-          <option name="sourceFilePath" value="docker-compose.yml" />
-        </settings>
-      </deployment>
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Go Test.TestCantHandleFailedApiInnerRequest in github.com/hong195/wheater-bot/internal/repo/webapi" />
         <item itemvalue="Go Test.TestGetWeatherDetailsByCoordinates in github.com/hong195/wheater-bot/internal/usecase/weather" />
+        <item itemvalue="Go Test.TestParsingCoordsFromStrings in github.com/hong195/wheater-bot/internal/controller/telegram/request" />
+        <item itemvalue="Go Test.TestCantHandleFailedApiInnerRequest in github.com/hong195/wheater-bot/internal/repo/webapi" />
         <item itemvalue="Go Test.TestItFailsIfRepoCallFails in github.com/hong195/wheater-bot/internal/usecase/weather" />
         <item itemvalue="Go Test.TestGetWeatherDetails in github.com/hong195/wheater-bot/internal/repo/webapi" />
-        <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
       </list>
     </recent_temporary>
   </component>
@@ -226,21 +225,13 @@
     <MESSAGE value="Add in-memory repositories for city and weather details with basic data and retrieval methods" />
     <MESSAGE value="Enhance city details structure and API response handling with additional fields" />
     <MESSAGE value="Enhance city details structure by adding postcode and neighborhood fields" />
-    <option name="LAST_COMMIT_MESSAGE" value="Enhance city details structure by adding postcode and neighborhood fields" />
+    <MESSAGE value="Integrate Telegram bot functionality for weather updates and command handling" />
+    <option name="LAST_COMMIT_MESSAGE" value="Integrate Telegram bot functionality for weather updates and command handling" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/internal/usecase/weather/weather.go</url>
-          <line>42</line>
-          <option name="timeStamp" value="86" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="GoTestRunConfiguration">
         <watch expression="*(*&quot;net/http.Response&quot;)(1374390648976)" />

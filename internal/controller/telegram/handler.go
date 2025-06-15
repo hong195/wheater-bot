@@ -34,6 +34,18 @@ func (h *Handler) StartCommand() error {
 	return nil
 }
 
+func (h *Handler) SendATextMsg(msg string) error {
+	m := tgbotapi.NewMessage(h.chatID, msg)
+
+	_, err := h.botApi.Send(m)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (h *Handler) UnknownCommand() error {
 	msg := tgbotapi.NewMessage(h.chatID, "Неизвестная команда!")
 
