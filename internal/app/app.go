@@ -3,6 +3,7 @@ package app
 
 import (
 	"fmt"
+	"github.com/hong195/wheater-bot/internal/controller/telegram"
 	"github.com/hong195/wheater-bot/internal/repo/webapi"
 	stdhttp "net/http"
 	"os"
@@ -40,6 +41,9 @@ func Run(cfg *config.Config) {
 	// HTTP Server
 	httpServer := httpserver.New(httpserver.Port(cfg.HTTP.Port), httpserver.Prefork(cfg.HTTP.UsePreforkMode))
 	http.NewRouter(httpServer.App, cfg, weatherUseCase, lgr)
+
+	//Telegram
+	telegram.NewBot(httpServer.App, cfg, weatherUseCase, lgr)
 
 	// Start servers
 	httpServer.Start()

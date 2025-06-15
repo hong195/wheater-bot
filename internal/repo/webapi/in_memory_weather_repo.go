@@ -19,7 +19,7 @@ func NewInMemoryWeatherRepo() *InMemoryWeatherRepo {
 func getFakeWeatherDetails() map[entity.Coords]*entity.Weather {
 	storage := make(map[entity.Coords]*entity.Weather)
 
-	storage[entity.Coords{Longitude: 41.311081, Latitude: 69.240562}] = &entity.Weather{
+	storage[entity.Coords{Latitude: 41.311081, Longitude: 69.240562}] = &entity.Weather{
 		Sunrise:     1749729167,
 		Sunset:      1749729167,
 		Temperature: 30,

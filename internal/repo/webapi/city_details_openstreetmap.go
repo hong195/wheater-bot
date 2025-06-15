@@ -38,7 +38,7 @@ func (c *CityDetailsRepository) GetCityDetailsByCoordinates(ctx context.Context,
 	}
 
 	q := u.Query()
-	q.Set("format", "json")
+	q.Set("format", "jsonv2")
 	q.Set("lat", strconv.FormatFloat(lat, 'f', -1, 64))
 	q.Set("lon", strconv.FormatFloat(lon, 'f', -1, 64))
 	q.Set("accept-language", "ru")

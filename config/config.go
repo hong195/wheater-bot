@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/caarlos0/env/v11"
+	"github.com/joho/godotenv"
 )
 
 type (
@@ -15,6 +16,7 @@ type (
 		Metrics     Metrics
 		Swagger     Swagger
 		OpenWeather OpenWeather
+		Telegram    Telegram
 	}
 
 	// App -.
@@ -48,10 +50,21 @@ type (
 		ApiUrl string `env:"OPEN_WEATHER_API_URL,required"`
 		ApiKey string `env:"OPEN_WEATHER_API_KEY,required"`
 	}
+
+	Telegram struct {
+		Token      string `env:"TELEGRAM_TOKEN,required"`
+		WebhookURL string `env:"TELEGRAM_WEBHOOK_URL,required"`
+	}
 )
 
 // NewConfig returns app config.
 func NewConfig() (*Config, error) {
+
+	err := godotenv.Load()
+	if err != nil {
+		return nil, fmt.Errorf("error loading config: %w", err)
+	}
+
 	cfg := &Config{}
 
 	if err := env.Parse(cfg); err != nil {

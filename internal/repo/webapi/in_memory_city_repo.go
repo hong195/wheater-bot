@@ -19,7 +19,7 @@ func NewInMemoryCityRepo() *InMemoryCityRepo {
 func getFakeData() map[entity.Coords]entity.CityDetails {
 	storage := make(map[entity.Coords]entity.CityDetails)
 
-	storage[entity.Coords{Longitude: 41.311081, Latitude: 69.240562}] = entity.CityDetails{
+	storage[entity.Coords{Latitude: 41.311081, Longitude: 69.240562}] = entity.CityDetails{
 		City:    "Tashkent",
 		Country: "Uzbekistan",
 	}

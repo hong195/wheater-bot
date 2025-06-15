@@ -29,7 +29,7 @@ func (uc *UseCase) GetWeatherByCoordinates(ctx context.Context, lat, lon float64
 	g, ctx := errgroup.WithContext(ctx)
 
 	g.Go(func() error {
-		res, err := uc.weatherRepo.GetWeatherByCoordinates(ctx, lon, lat)
+		res, err := uc.weatherRepo.GetWeatherByCoordinates(ctx, lat, lon)
 
 		if err != nil {
 			return err
@@ -40,7 +40,7 @@ func (uc *UseCase) GetWeatherByCoordinates(ctx context.Context, lat, lon float64
 	})
 
 	g.Go(func() error {
-		res, err := uc.cityDetailsRepo.GetCityDetailsByCoordinates(ctx, lon, lat)
+		res, err := uc.cityDetailsRepo.GetCityDetailsByCoordinates(ctx, lat, lon)
 
 		if err != nil {
 			return err

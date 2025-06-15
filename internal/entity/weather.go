@@ -4,7 +4,7 @@ import "context"
 
 type (
 	WeatherRepository interface {
-		GetWeatherByCoordinates(ctx context.Context, lot, lat float64) (*Weather, error)
+		GetWeatherByCoordinates(ctx context.Context, lat, lot float64) (*Weather, error)
 	}
 
 	Weather struct {

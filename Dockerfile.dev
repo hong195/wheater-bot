@@ -1,0 +1,5 @@
+# Final image for dev (uses base with source code)
+FROM golang:1.24.3-alpine3.21 as dev
+WORKDIR /app
+COPY . .
+CMD ["go", "run", "./cmd/app"]
